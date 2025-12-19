@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* 2 HÀNG – 4 SP / HÀNG */
+.combo-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* Card */
+.combo-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.combo-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Ảnh giả lập */
+.mock-image {
+    height: 150px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+/* Màu giả lập */
+.yellow { background: linear-gradient(135deg, #ffe082, #ffca28); }
+.red    { background: linear-gradient(135deg, #ef5350, #b71c1c); }
+.orange { background: linear-gradient(135deg, #ffb74d, #f57c00); }
+.dark   { background: linear-gradient(135deg, #424242, #212121); color: #fff; }
+.green  { background: linear-gradient(135deg, #81c784, #388e3c); }
+.blue   { background: linear-gradient(135deg, #64b5f6, #1976d2); }
+.purple { background: linear-gradient(135deg, #ba68c8, #7b1fa2); }
+.brown  { background: linear-gradient(135deg, #bcaaa4, #5d4037); }
+
+.combo-card h3 {
+    font-size: 14px;
+    margin: 8px 0 5px;
+}
+
+.price {
+    color: #b71c1c;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .combo-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .combo-container {
+        grid-template-columns: 1fr;
+    }
+}
