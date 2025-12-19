@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thanh toán - Đặt vé xem phim</title>
+  <link rel="stylesheet" href="css/payment.css">
+</head>
+<body>
+
+  <h1>💳 Thanh toán vé xem phim</h1>
+
+  <div class="cinema-name">🎥 RẠP CINEMA ONLINE – CN HUẾ</div>
+
+  <div class="ticket-info" id="ticketInfo">
+    <p>Đang tải thông tin đặt vé...</p>
+  </div>
+
+  <button onclick="printInvoice()">🧾 In hóa đơn</button>
+  <br>
+
+  <button onclick="window.location.href='index.html'">🏠 Về trang chủ</button>
+  <br>
+
+  <!-- ✅ NÚT MỚI -->
+  <button onclick="goInvoiceHistory()" class="history-btn">
+    📜 Lịch sử hóa đơn
+  </button>
+
+  <script src="js/payment.js"></script>
+</body>
+</html>
