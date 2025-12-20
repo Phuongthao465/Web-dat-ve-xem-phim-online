@@ -1,0 +1,63 @@
+body {
+     font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+      font-size: 16px;
+    background: #0d1b2a;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.detail-container {
+    max-width: 900px;
+    margin: 50px auto;
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.poster {
+    width: 300px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+.info h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.info p {
+    font-size: 16px;
+    margin: 6px 0;
+    opacity: 0.9;
+}
+
+.btn-group {
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+}
+
+.back-btn, .booking-btn {
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    font-size: 15px;
+}
+
+.back-btn {
+    background: #555;
+    color: white;
+}
+
+.booking-btn {
+    background: #e50914;
+    color: white;
+}
+
+.booking-btn:hover {
+    background: #ff1f2a;
+}
