@@ -1,0 +1,83 @@
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #1f2933, #0b0f14);
+  color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+/* Tiêu đề */
+.title {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #facc15;
+  text-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
+}
+
+/* Khung bảng */
+.table-container {
+  width: 100%;
+  max-width: 1100px;
+  background: #111827;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+/* Bảng */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+}
+
+/* Header */
+thead {
+  background: linear-gradient(135deg, #facc15, #f59e0b);
+  color: #111827;
+}
+
+th {
+  padding: 14px;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+/* Body */
+td {
+  padding: 14px;
+  text-align: center;
+  border-bottom: 1px solid #1f2937;
+}
+
+/* Hover dòng */
+tbody tr:hover {
+  background: rgba(250, 204, 21, 0.08);
+}
+
+/* Giá tiền */
+td:nth-child(4) {
+  color: #22c55e;
+  font-weight: bold;
+}
+
+/* Thanh toán */
+td:nth-child(5) {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    font-size: 12px;
+  }
+}
