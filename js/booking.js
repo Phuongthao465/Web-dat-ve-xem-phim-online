@@ -61,3 +61,5 @@ function confirmBooking(){
   localStorage.setItem("selectedDate", selectedDate);
   window.location.href = "booking-seats.html";
 }
+localStorage.setItem("cinemaName", "Rạp Cinema Huế");
+localStorage.setItem("cinemaAddress", "25 Lê Lợi, TP Huế");

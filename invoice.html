@@ -1,30 +1,40 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Lịch sử hóa đơn</title>
-  <link rel="stylesheet" href="css/invoice.css">
+    <meta charset="UTF-8">
+    <title>Lịch sử hóa đơn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/invoice.css">
 </head>
 <body>
 
-  <h2 class="title">🧾 Lịch sử hóa đơn</h2>
+<h1 style="text-align:center; color:#ffcc00; margin-top:30px;">
+    📜 Lịch sử hóa đơn
+</h1>
 
-  <div class="table-container">
+<div class="table-wrap">
     <table>
-      <thead>
-        <tr>
-          <th>Phim</th>
-          <th>Suất chiếu</th>
-          <th>Ghế</th>
-          <th>Tổng tiền</th>
-          <th>Thanh toán</th>
-          <th>Ngày</th>
-        </tr>
-      </thead>
-      <tbody id="invoiceBody"></tbody>
+        <thead>
+            <tr>
+                <th>PHIM</th>
+                <th>SUẤT CHIẾU</th>
+                <th>GHẾ</th>
+                <th>TỔNG TIỀN</th>
+                <th>THANH TOÁN</th>
+                <th>NGÀY</th>
+            </tr>
+        </thead>
+        <tbody id="invoiceBody"></tbody>
+            <!-- JS render ở đây -->
+        </tbody>
     </table>
-  </div>
+</div>
 
-  <script src="js/invoice.js"></script>
+<div style="text-align:center; margin:20px;">
+    <button onclick="window.location.href='index.html'">🏠 Về trang chủ</button>
+</div>
+
+<script src="js/invoice.js"></script>
 </body>
 </html>
+<button onclick="newBooking()">🎬 Đặt vé mới</button>

@@ -1,5 +1,5 @@
 const seatContainer = document.getElementById("seatContainer");
-const bookedSeats = [6, 7, 15, 23]; // ghế đã đặt
+const bookedSeats = [6, 7, 15, 23];
 const selectedSeats = new Set();
 
 const totalSeats = 40;
@@ -18,20 +18,23 @@ for (let i = 1; i <= totalSeats; i++) {
 
   seat.onclick = () => {
     if (seat.classList.contains("booked")) return;
+
     seat.classList.toggle("selected");
     if (selectedSeats.has(i)) selectedSeats.delete(i);
     else selectedSeats.add(i);
+
     updateInfo();
   };
 
   seatContainer.appendChild(seat);
 }
 
-// Cập nhật thông tin ghế và tổng tiền
+// Cập nhật thông tin
 function updateInfo() {
   const seats = [...selectedSeats];
+
   document.getElementById("selectedInfo").textContent =
-    seats.length > 0
+    seats.length
       ? `Ghế đã chọn: ${seats.join(", ")}`
       : "Chưa chọn ghế nào";
 
@@ -43,29 +46,31 @@ function updateInfo() {
 
   document.getElementById("totalPrice").textContent =
     `💰 Tổng tiền: ${total.toLocaleString("vi-VN")} đ`;
+
   return total;
 }
 
-// Khi xác nhận đặt vé
+// 🔥 CHỐT BOOKING Ở ĐÂY
 function confirmSeats() {
   if (selectedSeats.size === 0) {
     alert("Vui lòng chọn ít nhất một ghế!");
     return;
   }
 
-  const movie = localStorage.getItem("selectedMovie") || "Phim chưa chọn";
-  const date = localStorage.getItem("selectedDate") || "(chưa chọn ngày)";
-  const time = localStorage.getItem("showtime") || "(chưa chọn suất)";
-  const total = updateInfo();
-
-  const bookingData = {
-    movie,
-    date,
-    time,
+  const booking = {
+    movie: localStorage.getItem("movieName") || "Chưa chọn phim",
+    date: localStorage.getItem("selectedDate") || "Chưa chọn ngày",
+    time: localStorage.getItem("showtime") || "Chưa chọn suất",
     seats: [...selectedSeats],
-    total
+    total: updateInfo()
   };
-  localStorage.setItem("bookingData", JSON.stringify(bookingData));
+
+  console.log("BOOKING TRƯỚC KHI LƯU:", booking);
+
+  localStorage.setItem("booking", JSON.stringify(booking));
+
+  // TEST NGAY
+  console.log("BOOKING SAU KHI LƯU:", localStorage.getItem("booking"));
 
   window.location.href = "food.html";
 }

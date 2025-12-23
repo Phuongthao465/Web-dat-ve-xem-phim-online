@@ -1,65 +1,68 @@
-const data = JSON.parse(localStorage.getItem("bookingData"));
-const cinemaName = localStorage.getItem("cinemaName") || "Chưa rõ rạp";
-const cinemaAddress = localStorage.getItem("cinemaAddress") || "Đang cập nhật";
+document.addEventListener("DOMContentLoaded", () => {
 
-/* LẤY DANH SÁCH ĐỒ ĂN */
-const foods = JSON.parse(localStorage.getItem("selectedFoods")) || [];
+  const booking = JSON.parse(localStorage.getItem("booking"));
+  const foods = JSON.parse(localStorage.getItem("selectedFoods")) || [];
+  const cinemaName = localStorage.getItem("cinemaName") || "Chưa chọn rạp";
+  const cinemaAddress = localStorage.getItem("cinemaAddress") || "";
 
-let foodHTML = "";
-let foodTotal = 0;
+  if (!booking) {
+    alert("❌ Không có dữ liệu đặt vé!");
+    window.location.href = "movies.html";
+    return;
+  }
 
-if (foods.length > 0) {
-  foodHTML += `<div class="food-section"><h3>🍟 Đồ ăn & Thức uống</h3>`;
+  // ===== ĐỒ ĂN =====
+  let foodHTML = "";
+  let foodTotal = 0;
 
-  foods.forEach(item => {
-    let itemTotal = item.price * item.qty;
+  if (foods.length > 0) {
+    foodHTML += `<h3>🍿 Đồ ăn & Thức uống</h3>`;
+    foods.forEach(item => {
+      const total = item.price * item.qty;
+      foodTotal += total;
+      foodHTML += `
+        <p>${item.name} × ${item.qty}
+        — <b>${total.toLocaleString("vi-VN")} đ</b></p>
+      `;
+    });
+  } else {
+    foodHTML = `<p>🍿 Không chọn đồ ăn</p>`;
+  }
 
-    foodHTML += `
-      <div class="food-item">
-        ${item.name} × ${item.qty} — <strong>${itemTotal.toLocaleString("vi-VN")} đ</strong>
-      </div>`;
+  const finalTotal = booking.total + foodTotal;
 
-    foodTotal += itemTotal;
-  });
-
-  foodHTML += `<p><strong>Tổng đồ ăn:</strong> ${foodTotal.toLocaleString("vi-VN")} đ</p></div>`;
-}
-
-/* HIỂN THỊ TOÀN BỘ THÔNG TIN */
-if (data) {
-  const finalTotal = data.total + foodTotal;
-
+  // ===== HIỂN THỊ =====
   document.getElementById("ticketInfo").innerHTML = `
-    <p><strong>🎬 Phim:</strong> ${data.movie}</p>
-    <p><strong>📅 Ngày chiếu:</strong> ${data.date}</p>
-    <p><strong>🕒 Suất chiếu:</strong> ${data.time}</p>
-    <p><strong>💺 Ghế:</strong> ${data.seats.join(", ")}</p>
-    <p><strong>🏢 Rạp:</strong> ${cinemaName} - ${cinemaAddress}</p>
-    <p><strong>🎟️ Tiền vé:</strong> ${data.total.toLocaleString("vi-VN")} đ</p>
+    <p><b>🎬 Phim:</b> ${booking.movie}</p>
+    <p><b>📅 Suất chiếu:</b> ${booking.date} - ${booking.time}</p>
+    <p><b>💺 Ghế:</b> ${booking.seats.join(", ")}</p>
+    <p><b>🏢 Rạp:</b> ${cinemaName} ${cinemaAddress}</p>
     ${foodHTML}
-    <p style="margin-top:15px; font-size:18px; color:#ffcc00;">
-      <strong>💰 Tổng thanh toán: ${finalTotal.toLocaleString("vi-VN")} đ</strong>
-    </p>`;
-} else {
-  document.getElementById("ticketInfo").innerHTML = `<p>❌ Không tìm thấy thông tin đặt vé!</p>`;
-}
+    <p style="font-size:18px;color:#ffcc00">
+      <b>💰 Tổng thanh toán: ${finalTotal.toLocaleString("vi-VN")} đ</b>
+    </p>
+  `;
 
-function printInvoice() {
-  window.print();
-}
-function goInvoiceHistory() {
-  window.location.href = "invoice.html";
-}
-fetch("/api/save_invoice.php", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    user_id: 1,
-    movie_name,
-    show_time,
-    seats,
-    total_price,
-    payment_method: "Momo"
-  })
+  // ===== THANH TOÁN =====
+  document.getElementById("payBtn").onclick = () => {
+    fetch("/Web-dat-ve-xem-phim-online/api/save_invoice.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: 1,
+        movie_name: booking.movie,
+        show_time: `${booking.date} - ${booking.time}`,
+        seats: booking.seats.join(", "),
+        total_price: finalTotal,
+        payment_method: "Tiền mặt"
+      })
+    })
+    .then(res => res.json())
+    .then(() => {
+      window.location.href = "invoice.html";
+    })
+    .catch(() => {
+      alert("❌ Lỗi thanh toán");
+    });
+  };
 });
-

@@ -54,3 +54,12 @@ function changeQty(i, val) {
 function goPayment() {
     window.location.href = "payment.html";
 }
+const selectedFoods = foods
+  .map((f, idx) => ({
+    name: f.name,
+    price: f.price,
+    qty: quantities[idx]
+  }))
+  .filter(item => item.qty > 0);
+
+localStorage.setItem("selectedFoods", JSON.stringify(selectedFoods));
